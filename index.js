@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-06 09:14:45
- * @LastEditTime: 2020-10-08 16:55:34
+ * @LastEditTime: 2020-10-10 10:29:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nodejs\day03\app\index.js
@@ -14,6 +14,8 @@ const driver = require('./routes/driver')
 const address = require('./routes/address')
 const order = require('./routes/order')
 const comment = require('./routes/comment')
+const product = require('./routes/product')
+const category = require('./routes/category')
 //创建应用
 let app = express();
 //使用拦截器
@@ -34,6 +36,8 @@ app.use('/address',address)
 app.use('/driver',driver)
 app.use('/order',order)
 app.use('/comment',comment)
+app.use('/product',product)
+app.use('/category',category)
 
 
 //启动应用

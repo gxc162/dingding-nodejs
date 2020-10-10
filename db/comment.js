@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-08 16:54:36
- * @LastEditTime: 2020-10-10 09:42:53
+ * @LastEditTime: 2020-10-10 17:46:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \briup02\nodejs\day03\app\db\comment.js
@@ -109,7 +109,7 @@ let pageQuery = (param,handle)=>{
     pool.getConnection((err,conn)=>{
         if(err)throw err;
         let sql = 'select * from ej_comment limit ?,?';
-        conn.query(sql,[param.page*param.pagesize,Number(param.pagesize)],(err,results)=>{
+        conn.query(sql,[param.page*param.pageSize,Number(param.pageSize)],(err,results)=>{
             if(err) throw err;
             handle(results);
             conn.release();
@@ -124,8 +124,8 @@ let pageQuery = (param,handle)=>{
 let mohuQuery = (param,handle)=>{
     pool.getConnection((err,conn)=>{
         if(err) throw err;
-        let sql = 'select * from ej_comment where status like ?'
-        conn.query(sql,['%'+param.status+'%'],(err,results)=>{
+        let sql = 'select * from ej_comment where content like ?'
+        conn.query(sql,['%'+param.content+'%'],(err,results)=>{
             if(err) throw err;
             handle(results);
             conn.release();

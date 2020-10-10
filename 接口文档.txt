@@ -1,4 +1,4 @@
-打车系统接口文档：
+叮叮打车系统接口文档：
 	数据库：
 		host:'121.40.187.6',
 	    port:3306,
@@ -16,15 +16,16 @@
 				需要数据：id					query
 						 realname			query
 						 telephone			query
-						 password			query
+						 gender			query
+						 status			query
 		/customer/batchDelete      post        批量删除
 				需要数据：ids                query
 						 ids=1&ids=2
 		/customer/pageQuery        post        分页查询
 				需要数据：page				query
-						 pagesize       	query
+						 pageSize       	query
 						 page=1&pagesize=5
-		/customer/mohuQuery        get        模糊查询
+		/customer/mohuQuery        post        模糊查询
 				需要数据：realname=张
 	2.司机 driver	对应数据库表：base_user(type='waiter')
 		/driver/findAll          get         查询所有司机信息
@@ -40,9 +41,9 @@
 						 ids=1&ids=2
 		/driver/pageQuery        post        分页查询
 				需要数据：page				query
-						 pagesize       	query
-						 page=1&pagesize=5
-		/driver/mohuQuery        get        模糊查询
+						 pageSize       	query
+						 page=1&pageSize=5
+		/driver/mohuQuery        post        模糊查询
 				需要数据：realname=张
 	3.地址 address	对应数据库表：ej_address
 		/address/findAll          get         查询所有地址信息
@@ -54,33 +55,33 @@
 					city				query
 					area				query
 					address 			query
+					telephone 			query
 		/address/batchDelete      post        批量删除
 				需要数据：ids                query
 						 ids=1&ids=2
 		/address/pageQuery        post        分页查询
 				需要数据：page				query
-						 pagesize       	query
-						 page=1&pagesize=5
-		/address/mohuQuery        get        模糊查询
+						 pageSize       	query
+						 page=1&pageSize=5
+		/address/mohuQuery        post        模糊查询
 				需要数据：province=江苏
 	4.订单 order		对应数据库表：ej_order
 		/order/findAll          get         查询所有订单信息
 		/order/findByCustomerId        get         根据顾客ID查找
 		/order/deleteById       get         根据ID删除
-		/order/saveOrUpdate     post        保存或更新(没有ID时保存，有ID时更新)
+		不需要/order/saveOrUpdate     post        保存或更新(没有ID时保存，有ID时更新)
 			需要数据：id					query
 					total			query
 					status				query
 					customer_id				query
-					waiter_id 			query
 		/order/batchDelete      post        批量删除
 				需要数据：ids                query
 						 ids=1&ids=2
 		/order/pageQuery        post        分页查询
 				需要数据：page				query
 						 pagesize       	query
-						 page=1&pagesize=5
-		/order/mohuQuery        get        模糊查询
+						 page=1&pageSize=5
+		不需要/order/mohuQuery        get        模糊查询
 				需要数据：status=完成
 	5.评论 comment		对应数据库表：ej_comment
 		/comment/findAll          get         查询所有评论信息
@@ -96,11 +97,11 @@
 						 ids=1&ids=2
 		/comment/pageQuery        post        分页查询
 				需要数据：page				query
-						 pagesize       	query
-						 page=1&pagesize=5
-		/comment/mohuQuery        get        模糊查询
+						 pageSize       	query
+						 page=1&pageSize=5
+		/comment/mohuQuery        post        模糊查询
 				需要数据：status=通过
-	6.产品 product		对应数据库表：ej_product
+	不需要6.产品 product		对应数据库表：ej_product
 		/product/findAll          get         查询所有评论信息
 		/product/findById        get         根据ID查找
 		/product/deleteById       get         根据ID删除
@@ -119,7 +120,7 @@
 						 page=1&pagesize=5
 		/product/mohuQuery        get        模糊查询
 				需要数据：name=
-	7.栏目 category		对应数据库表：ej_category
+	不需要7.栏目 category		对应数据库表：ej_category
 		/category/findAll          get         查询所有评论信息
 		/category/findById        get         根据ID查找
 		/category/deleteById       get         根据ID删除

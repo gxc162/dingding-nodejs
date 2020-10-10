@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-06 09:57:03
- * @LastEditTime: 2020-10-10 09:40:07
+ * @LastEditTime: 2020-10-10 16:45:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nodejs\day03\app\db\customer.js
@@ -67,12 +67,12 @@ let saveOrUpdate = (param,handle)=>{
         let sql = '';
         if(param.id){
             //更新
-            sql = 'update ej_address set province=?,city=?,area=?,address=? where id=?';
+            sql = 'update ej_address set province=?,city=?,area=?,address=?,telephone=? where id=?';
         }else{
             //新增
-            sql = 'insert into ej_address(province,city,area,address) values(?,?,?,?)';
+            sql = 'insert into ej_address(province,city,area,address,telephone) values(?,?,?,?,?)';
         }
-        conn.query(sql,[param.province,param.city,param.area,param.address,param.id],(err,results)=>{
+        conn.query(sql,[param.province,param.city,param.area,param.address,param.telephone,param.id],(err,results)=>{
             if(err) throw err;
             handle(results);
             conn.release();
@@ -107,10 +107,12 @@ let batchDelete = (param,handle)=>{
 let pageQuery = (param,handle)=>{
     pool.getConnection((err,conn)=>{
         if(err)throw err;
+        console.log(param)
         let sql = 'select * from ej_address limit ?,?';
-        conn.query(sql,[param.page*param.pagesize,Number(param.pagesize)],(err,results)=>{
+        conn.query(sql,[param.page*param.pageSize,Number(param.pageSize)],(err,results)=>{
             if(err) throw err;
             handle(results);
+            console.log(results)
             conn.release();
         })
     })
@@ -123,10 +125,12 @@ let pageQuery = (param,handle)=>{
 let mohuQuery = (param,handle)=>{
     pool.getConnection((err,conn)=>{
         if(err) throw err;
-        let sql = 'select * from ej_address where province like ?'
-        conn.query(sql,['%'+param.province+'%'],(err,results)=>{
+        console.log(param)
+        let sql = 'select * from ej_address where address like ?'
+        conn.query(sql,['%'+param.address+'%'],(err,results)=>{
             if(err) throw err;
             handle(results);
+            console.log(results)
             conn.release();
         })
     })

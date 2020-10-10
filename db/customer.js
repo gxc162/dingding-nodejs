@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-06 09:57:03
- * @LastEditTime: 2020-10-10 09:37:01
+ * @LastEditTime: 2020-10-10 16:36:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nodejs\day03\app\db\customer.js
@@ -68,12 +68,12 @@ let saveOrUpdate = (param,handle)=>{
         let sql = '';
         if(param.id){
             //更新
-            sql = 'update base_user set realname=?,telephone=?,password=?,type=? where id=?';
+            sql = 'update base_user set realname=?,telephone=?,gender=?,status=?,type=? where id=?';
         }else{
             //新增
-            sql = 'insert into base_user(realname,telephone,password,type) values(?,?,?,?)';
+            sql = 'insert into base_user(realname,telephone,gender,status,type) values(?,?,?,?,?)';
         }
-        conn.query(sql,[param.realname,param.telephone,param.password,'customer',param.id],(err,results)=>{
+        conn.query(sql,[param.realname,param.telephone,param.gender,param.status,'customer',param.id],(err,results)=>{
             if(err) throw err;
             handle(results);
             conn.release();
@@ -109,7 +109,7 @@ let pageQuery = (param,handle)=>{
     pool.getConnection((err,conn)=>{
         if(err)throw err;
         let sql = 'select * from base_user where type=? limit ?,?';
-        conn.query(sql,['customer',param.page*param.pagesize,Number(param.pagesize)],(err,results)=>{
+        conn.query(sql,['customer',param.page*param.pageSize,Number(param.pageSize)],(err,results)=>{
             if(err) throw err;
             handle(results);
             conn.release();

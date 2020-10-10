@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-06 09:57:03
- * @LastEditTime: 2020-10-10 09:38:01
+ * @LastEditTime: 2020-10-10 15:57:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nodejs\day03\app\db\customer.js
@@ -67,12 +67,12 @@ let saveOrUpdate = (param,handle)=>{
         let sql = '';
         if(param.id){
             //更新
-            sql = 'update base_user set realname=?,telephone=?,password=?,type=? where id=?';
+            sql = 'update base_user set realname=?,telephone=?,id_card=?,bank_card=?,status=?,type=? where id=?';
         }else{
             //新增
-            sql = 'insert into base_user(realname,telephone,password,type) values(?,?,?,?)';
+            sql = 'insert into base_user(realname,telephone,id_card,bank_card,status,type) values(?,?,?,?,?,?)';
         }
-        conn.query(sql,[param.realname,param.telephone,param.password,'waiter',param.id],(err,results)=>{
+        conn.query(sql,[param.realname,param.telephone,param.id_card,param.bank_card,param.status,'waiter',param.id],(err,results)=>{
             if(err) throw err;
             handle(results);
             conn.release();
@@ -109,7 +109,7 @@ let pageQuery = (param,handle)=>{
     pool.getConnection((err,conn)=>{
         if(err)throw err;
         let sql = 'select * from base_user where type=? limit ?,?';
-        conn.query(sql,['waiter',param.page*param.pagesize,Number(param.pagesize)],(err,results)=>{
+        conn.query(sql,['waiter',param.page*param.pageSize,Number(param.pageSize)],(err,results)=>{
             if(err) throw err;
             handle(results);
             conn.release();
@@ -125,7 +125,7 @@ let mohuQuery = (param,handle)=>{
     pool.getConnection((err,conn)=>{
         if(err) throw err;
         let sql = 'select * from base_user where realname like ? and type=?'
-        conn.query(sql,['%'+param.realname+'%','driver'],(err,results)=>{
+        conn.query(sql,['%'+param.realname+'%','waiter'],(err,results)=>{
             if(err) throw err;
             handle(results);
             conn.release();

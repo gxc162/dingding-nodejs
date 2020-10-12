@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-10-06 09:57:03
- * @LastEditTime: 2020-10-10 16:45:51
+ * @LastEditTime: 2020-10-11 10:59:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nodejs\day03\app\db\customer.js
@@ -107,12 +107,10 @@ let batchDelete = (param,handle)=>{
 let pageQuery = (param,handle)=>{
     pool.getConnection((err,conn)=>{
         if(err)throw err;
-        console.log(param)
         let sql = 'select * from ej_address limit ?,?';
         conn.query(sql,[param.page*param.pageSize,Number(param.pageSize)],(err,results)=>{
             if(err) throw err;
             handle(results);
-            console.log(results)
             conn.release();
         })
     })
